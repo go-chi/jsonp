@@ -59,40 +59,42 @@ type SomeObj struct {
 ```
 
 *Output:*
+
 ```
-curl -v "http://localhost:4444/"
+$ curl -v "http://localhost:4444/"
+*   Trying ::1...
+* Connected to localhost (::1) port 4444 (#0)
 > GET / HTTP/1.1
-> User-Agent: curl/7.37.1
 > Host: localhost:4444
+> User-Agent: curl/7.43.0
 > Accept: */*
 >
 < HTTP/1.1 200 OK
 < Content-Type: application/json; charset=UTF-8
-< Date: Sat, 08 Nov 2014 16:05:04 GMT
+< Date: Fri, 14 Aug 2015 19:11:44 GMT
 < Content-Length: 19
 <
 * Connection #0 to host localhost left intact
 {"name":"superman"}
-```
 
-```
-curl -v "http://localhost:4444/?callback=X"
+$ curl -v "http://localhost:4444/?callback=X"
+*   Trying ::1...
+* Connected to localhost (::1) port 4444 (#0)
 > GET /?callback=X HTTP/1.1
-> User-Agent: curl/7.37.1
 > Host: localhost:4444
+> User-Agent: curl/7.43.0
 > Accept: */*
 >
 < HTTP/1.1 200 OK
-< Content-Length: 22
+< Content-Length: 122
 < Content-Type: application/javascript
-< Date: Sat, 08 Nov 2014 16:05:23 GMT
+< Date: Fri, 14 Aug 2015 19:11:49 GMT
 <
 * Connection #0 to host localhost left intact
-X({"name":"superman"})
+X({"meta":{"content-length":19,"content-type":"application/json; charset=UTF-8","status":200},"data":{"name":"superman"}})
 ```
 
-
-## Also
+## NOTES
 
 Since JSONP must always respond with a 200, as thats what the browser `<script>`
 tag expects, a nice pattern that is also used in the GitHub API is to put the HTTP
@@ -109,3 +111,7 @@ JsonpCallbackFn_abc123etc({
   "data": { "name": "yummy" }
 })
 ```
+
+## LICENSE
+
+BSD
