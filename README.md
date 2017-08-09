@@ -110,4 +110,5 @@ JsonpCallbackFn_abc123etc({
 
 ## LICENSE
 
-BSD
+MIT - see LICENSE file
+
