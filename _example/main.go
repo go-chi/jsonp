@@ -1,27 +1,26 @@
-// JSONP example using Goji framework.. but anything that accepts
-// a http.Handler middleware chain will work
+// JSONP example using Chi http router.. but anything that accepts
+// a http.Handler will work
 package main
 
 import (
 	"log"
 	"net/http"
 
-	"github.com/goware/jsonp"
-	"github.com/unrolled/render"
-	"github.com/zenazn/goji/web"
-	"github.com/zenazn/goji/web/middleware"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/jsonp"
+	"github.com/go-chi/render"
 )
 
 func main() {
-	mux := web.New()
-	render := render.New(render.Options{})
+	mux := chi.NewRouter()
 
 	mux.Use(middleware.Logger)
 	mux.Use(jsonp.Handler)
 
 	mux.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		data := &SomeObj{"superman"}
-		render.JSON(w, 200, data)
+		render.JSON(w, r, data)
 	})
 
 	err := http.ListenAndServe(":4444", mux)
